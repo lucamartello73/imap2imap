@@ -46,7 +46,7 @@ def generate_config():
             'mailbox': os.environ.get('SRC_MAILBOX', 'INBOX'),
             'on_success': {
                 'delete_msg': os.environ.get('ON_SUCCESS_DELETE', 'false').lower() == 'true',
-                'move_to_mailbox': os.environ.get('ON_SUCCESS_MOVE_TO', 'forwarded'),
+                'move_to_mailbox': os.environ.get('ON_SUCCESS_MOVE_TO') or None,
                 'mark_as_seen': os.environ.get('ON_SUCCESS_MARK_SEEN', 'true').lower() == 'true'
             }
         },
