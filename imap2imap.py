@@ -305,7 +305,7 @@ class Imap2Imap(threading.Thread):
                 self.log.error("Failed to select '%s': %s", mailbox, data)
                 return None
 
-        search_criteria = '(SINCE "{}")'.format(since_date) if since_date else 'ALL'
+            search_criteria = '(SINCE "{}")'.format(since_date) if since_date else 'ALL'
             typ, data = imap.search(None, search_criteria)
             if typ == 'OK':
                 self.log.debug("IMAP search on 'ALL' succeeded")
