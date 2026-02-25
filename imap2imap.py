@@ -142,7 +142,8 @@ class Imap2Imap(threading.Thread):
         self.dest_imap = None
 
         mailbox = src_imap_config.get('mailbox', 'INBOX')
-        message_list = self.get_message_list(self.src_imap, mailbox)
+                since_date = src_imap_config.get('since_date', None)
+        message_list = self.get_message_list(self.src_imap, mailbox, since_date=since_date)
         if message_list is None:
             self.log.error("Failed to get list of message")
             return False
@@ -284,7 +285,7 @@ class Imap2Imap(threading.Thread):
             self.log.exception(imap_exception)
             return None
 
-    def get_message_list(self, imap, mailbox):
+    def get_message_list(self, imap, mailbox, since_date=None):
         """
         Get list of message ID in 'mailbox'
 
@@ -304,7 +305,8 @@ class Imap2Imap(threading.Thread):
                 self.log.error("Failed to select '%s': %s", mailbox, data)
                 return None
 
-            typ, data = imap.search(None, 'ALL')
+        search_criteria = '(SINCE "{}")'.format(since_date) if since_date else 'ALL'
+            typ, data = imap.search(None, search_criteria)
             if typ == 'OK':
                 self.log.debug("IMAP search on 'ALL' succeeded")
             else:
