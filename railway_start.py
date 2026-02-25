@@ -44,6 +44,7 @@ def generate_config():
             'user': os.environ['SRC_USER'],
             'password': os.environ['SRC_PASSWORD'],
             'mailbox': os.environ.get('SRC_MAILBOX', 'INBOX'),
+                        'since_date': os.environ.get('SRC_SINCE_DATE') or None,
             'on_success': {
                 'delete_msg': os.environ.get('ON_SUCCESS_DELETE', 'false').lower() == 'true',
                 'move_to_mailbox': os.environ.get('ON_SUCCESS_MOVE_TO') or None,
