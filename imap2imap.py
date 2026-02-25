@@ -142,7 +142,7 @@ class Imap2Imap(threading.Thread):
         self.dest_imap = None
 
         mailbox = src_imap_config.get('mailbox', 'INBOX')
-                since_date = src_imap_config.get('since_date', None)
+        since_date = src_imap_config.get('since_date', None)
         message_list = self.get_message_list(self.src_imap, mailbox, since_date=since_date)
         if message_list is None:
             self.log.error("Failed to get list of message")
